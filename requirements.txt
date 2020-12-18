@@ -11,10 +11,9 @@ cffi
 chardet
 cryptography
 defusedxml
-Django
+django
 django-allauth
 django-rest-framework
-djangorestframework
 idna
 oauthlib
 pycparser
@@ -27,3 +26,6 @@ six
 sqlparse
 urllib3
 whitenoise
+django-heroku
+gunicorn
+Pillow
