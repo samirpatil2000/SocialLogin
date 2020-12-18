@@ -1,0 +1,36 @@
+{% extends 'country/base.html' %}
+
+{% block body %}
+
+<div class="container">
+   
+<div class="card" style="width: 30rem;">
+       
+    <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <img class="card-img" src="{{country.country_image.url}}" alt="Card image cap">
+           </div>
+         <div class="col-sm-6">
+
+            <br>
+        Country Name: {{country.country_name}}<br>
+        Currency: {{country.currency}}<br><br>
+        Native Name: {{country.native_name}}<br>
+        Capital: {{country.capital}}<br>
+        Population: {{country.population}}<br>
+        Region: {{country.region}}<br>
+        Country Code:{{country.country_code}}<br>
+        Languages: {{country.laguage}}<br>
+       
+      
+        <a class ="btn btn-warning" href="{% url 'country:update' country.id %}">Update</a>
+        <a class ="btn btn-danger" href="{% url 'country:delete' country.id %}">DELETE</a>
+          
+
+        </div>  
+        </div>  
+    </div>
+ </div>
+
+{% endblock %}
