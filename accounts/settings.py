@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm^4k7xgz9+3s%g9ma(vzm!^h(x)96*tfme#tbu+(q%e$dx))u4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'social-login-k.herokuapp.com',
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_login',
+    'whitenoise.runserver_nostatic'
     'allauth',   # <--
     'allauth.account',   # <--
     'allauth.socialaccount',   # <--
