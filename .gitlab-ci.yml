@@ -30,7 +30,7 @@ Deployment:
   before_script:
     - gem install dpl
     - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-    - python -m venv venv
+    - pip install virtualenv
     - cd venv/Scripts
     - .\activate  
     - pip install -r requirements.txt
