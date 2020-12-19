@@ -29,10 +29,7 @@ Deployment:
   stage: deploy
   before_script:
     - gem install dpl
-    - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-    - pip install virtualenv
-    - cd venv/Scripts
-    - .\activate  
+    - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh 
     - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
