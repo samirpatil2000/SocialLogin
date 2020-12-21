@@ -5,16 +5,6 @@
   <div class="container">
     
       {% for country in country_list %}
-      <!-- <div class="col-md-3">
-        <div class="card">
-          <img src="{{country.countryImage.url}}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{country.country_name}}</h5>
-            <p class="card-text">{{country.currency}}</p>
-            <a href="{% url 'country:details' country.id %}">View Details</a>
-          </div>
-        </div>
-      </div> -->
 
       <div class="card" style="width: 30rem;">
        
@@ -33,18 +23,12 @@
                 </div>  
             </div>  
         </div>
-     </div>
+      </div>
     
       {% endfor %}
 
       <a href="{% url 'country:add_country' %}" class="btn btn-outline-primary">Add New Country</a>
     </div>
-  </div>
-
-  
-   
-        <!-- {{country.id}} -- {{country.name}}<br> -->
-        <!-- <a href="/country/{{country.id}}">{{country.name}}</a><br> -->
-        
+  </div>    
    
   {% endblock %}

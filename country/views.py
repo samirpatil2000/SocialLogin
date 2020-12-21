@@ -10,24 +10,24 @@ from .models import country
 from .serializers import CountrySerializer
 
 # Create your views here.
-@login_required(login_url="/account/login/")
+@login_required(login_url="/")
 def index(request):
     country_list = country.objects.all()
     context ={
         'country_list':country_list
     }
-    return render(request,'country/index2.html',context)
+    return render(request,'country/index.html',context)
 
-@login_required(login_url="/account/login/")
+@login_required(login_url="/")
 def details(request,country_id): 
     try:
         countrys = country.objects.get(id=country_id)
-    except ObjectDoesNotExist:
+    except country.DoesNotExist:
         countrys = None
     # countrys = country.objects.get(id=country_id)
-    return render(request,'country/details.html',{'country':countrys})
+    return render(request,'country/countryList.html',{'country':countrys})
 
-@login_required(login_url="/account/login/")
+@login_required(login_url="/")
 def add_country(request):
     if request.method == "POST":
         countryName=request.POST.get('countryName',)
@@ -42,32 +42,32 @@ def add_country(request):
         countrys = country(countryName=countryName,currency=currency,countryImage=countryImage,nativeName=nativeName,capital=capital,population=population,countryCode=countryCode,language=language,region=region,)
         countrys.save()
         return redirect('/country')
-    return render(request,'country/add_country.html')
+    return render(request,'country/addCountry.html')
 
-@login_required(login_url="/account/login/")
+@login_required(login_url="/")
 def update(request,id):
     try:
         countrys = country.objects.get(id=id)
-    except ObjectDoesNotExist:
+    except country.DoesNotExist:
         countrys = None
     # countrys = country.objects.get(id=id)
     form = countryForm(request.POST or None, request.FILES, instance=countrys)
     if form.is_valid():
         form.save()
         return redirect('/country')
-    return render(request,'country/edit.html',{'form':form,'country':countrys})
+    return render(request,'country/editCountry.html',{'form':form,'country':countrys})
 
-@login_required(login_url="/account/login/")
+@login_required(login_url="/")
 def delete(request,id):
     if request.method == "POST":
         try:
             countrys=country.objects.get(id=id)
-        except ObjectDoesNotExist:
+        except country.DoesNotExist:
             countrys = None
         # countrys=country.objects.get(id=id)
         countrys.delete()
         return redirect('/country')
-    return render(request,'country/delete.html')
+    return render(request,'country/deleteCountry.html')
 
 class CountryListView(generics.ListCreateAPIView):
     queryset = country.objects.all()
@@ -84,4 +84,4 @@ def saveCountry(request):
         if saveSerialize.is_valid():
             saveSerialize.save()
             return Response(saveSerialize.data,status=status.HTTP_201_CREATED)
-            return Response(saveSerialize.data,status=status.HTTP_400_BAD_REQUEST)
+        return Response(saveSerialize.data,status=status.HTTP_400_BAD_REQUEST)

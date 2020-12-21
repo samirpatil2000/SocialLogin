@@ -22,6 +22,6 @@ from .import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('',TemplateView.as_view(template_name="user_login/index.html")),
+    path('',TemplateView.as_view(template_name="country/base.html")),
      path('country/',include('country.urls')),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

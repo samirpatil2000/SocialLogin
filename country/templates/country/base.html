@@ -1,3 +1,5 @@
+{% load socialaccount %}
+{% providers_media_js %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +12,16 @@
   <nav class="navbar navbar-dark bg-dark">
     <span class="navbar-brand mb-0 h1">Countries</span>
   </nav>
- 
+  {% if user.is_authenticated %}
+    {{user}}
+    <a href="{% url 'account_logout' %}">Sign Out</a>
+  {% else %}
+    <a class="btn btn-outline-primary" href="{% provider_login_url 'google' %}">Login With Google</a>
+    <a class="btn btn-outline-primary" href="{% provider_login_url 'facebook' method='js_sdk' %}">Facebook Connect</a>
+  {% endif %}
 
   {% block body %}
-
+  
   {% endblock %}
 </body>
 </html>
