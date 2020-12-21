@@ -10,7 +10,7 @@ from .models import country
 from .serializers import CountrySerializer
 
 # Create your views here.
-@login_required(login_url="/")
+@login_required
 def index(request):
     country_list = country.objects.all()
     context ={
@@ -18,7 +18,7 @@ def index(request):
     }
     return render(request,'country/index.html',context)
 
-@login_required(login_url="/")
+@login_required
 def details(request,country_id): 
     try:
         countrys = country.objects.get(id=country_id)
@@ -27,7 +27,7 @@ def details(request,country_id):
     # countrys = country.objects.get(id=country_id)
     return render(request,'country/countryList.html',{'country':countrys})
 
-@login_required(login_url="/")
+@login_required
 def add_country(request):
     if request.method == "POST":
         countryName=request.POST.get('countryName',)
@@ -44,7 +44,7 @@ def add_country(request):
         return redirect('/country')
     return render(request,'country/addCountry.html')
 
-@login_required(login_url="/")
+@login_required
 def update(request,id):
     try:
         countrys = country.objects.get(id=id)
@@ -57,7 +57,7 @@ def update(request,id):
         return redirect('/country')
     return render(request,'country/editCountry.html',{'form':form,'country':countrys})
 
-@login_required(login_url="/")
+@login_required
 def delete(request,id):
     if request.method == "POST":
         try:
