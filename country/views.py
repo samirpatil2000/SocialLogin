@@ -19,30 +19,38 @@ def index(request):
     return render(request,'country/index2.html',context)
 
 @login_required(login_url="/account/login/")
-def details(request,country_id):
-    countrys = country.objects.get(id=country_id)
+def details(request,country_id): 
+    try:
+        countrys = country.objects.get(id=country_id)
+    except ObjectDoesNotExist:
+        countrys = None
+    # countrys = country.objects.get(id=country_id)
     return render(request,'country/details.html',{'country':countrys})
 
 @login_required(login_url="/account/login/")
 def add_country(request):
     if request.method == "POST":
-        country_name=request.POST.get('country_name',)
+        countryName=request.POST.get('countryName',)
         currency=request.POST.get('currency',)
-        country_image=request.FILES['country_image']
-        native_name=request.POST.get('native_name',)
+        countryImage=request.FILES['countryImage']
+        nativeName=request.POST.get('nativeName',)
         capital=request.POST.get('capital',)
         population=request.POST.get('population',)
-        country_code=request.POST.get('country_code',)
-        laguage=request.POST.get('laguage',)
+        countryCode=request.POST.get('countryCode',)
+        language=request.POST.get('language',)
         region=request.POST.get('region',)
-        countrys = country(country_name=country_name,currency=currency,country_image=country_image,native_name=native_name,capital=capital,population=population,country_code=country_code,laguage=laguage,region=region,)
+        countrys = country(countryName=countryName,currency=currency,countryImage=countryImage,nativeName=nativeName,capital=capital,population=population,countryCode=countryCode,language=language,region=region,)
         countrys.save()
         return redirect('/country')
     return render(request,'country/add_country.html')
 
 @login_required(login_url="/account/login/")
 def update(request,id):
-    countrys = country.objects.get(id=id)
+    try:
+        countrys = country.objects.get(id=id)
+    except ObjectDoesNotExist:
+        countrys = None
+    # countrys = country.objects.get(id=id)
     form = countryForm(request.POST or None, request.FILES, instance=countrys)
     if form.is_valid():
         form.save()
@@ -52,20 +60,23 @@ def update(request,id):
 @login_required(login_url="/account/login/")
 def delete(request,id):
     if request.method == "POST":
-        countrys=country.objects.get(id=id)
+        try:
+            countrys=country.objects.get(id=id)
+        except ObjectDoesNotExist:
+            countrys = None
+        # countrys=country.objects.get(id=id)
         countrys.delete()
         return redirect('/country')
     return render(request,'country/delete.html')
 
-
-
-
 class CountryListView(generics.ListCreateAPIView):
     queryset = country.objects.all()
     serializer_class = CountrySerializer
+
 class CountryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = country.objects.all()
     serializer_class = CountrySerializer
+
 @api_view(['GET','POST','PATCH','PUT','DELETE'])
 def saveCountry(request):
     if request.method =="POST":

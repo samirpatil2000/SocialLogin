@@ -9,19 +9,19 @@
     <div class="card-body">
         <div class="row">
           <div class="col-sm-6">
-            <img class="card-img" src="{{country.country_image.url}}" alt="Card image cap">
+            <img class="card-img" src="{{country.countryImage.url}}" alt="Card image cap">
            </div>
          <div class="col-sm-6">
 
             <br>
-        Country Name: {{country.country_name}}<br>
+        Country Name: {{country.countryName}}<br>
         Currency: {{country.currency}}<br><br>
-        Native Name: {{country.native_name}}<br>
+        Native Name: {{country.nativeName}}<br>
         Capital: {{country.capital}}<br>
         Population: {{country.population}}<br>
         Region: {{country.region}}<br>
-        Country Code:{{country.country_code}}<br>
-        Languages: {{country.laguage}}<br>
+        Country Code:{{country.countryCode}}<br>
+        Languages: {{country.language}}<br>
        
       
         <a class ="btn btn-warning" href="{% url 'country:update' country.id %}">Update</a>
